@@ -285,9 +285,65 @@ require("./mock") //引入mock数据，关闭则注释该行
 
 
 
+# 框架分析
+
+![image-20220718123534089](https://i0.hdslb.com/bfs/album/993b99c069242ec5a4b290e2ee69011b7f02518d.png)
+
+左侧菜单栏为一个独立的组件sicermenu， 头部为独立的组件header
+
+而主内容区，通过路由动态显示内容。
+
+
+
+
+
+
+
+
+
+
+
+# 思考
+
+## 左侧导航栏铺满整个左侧
+
+![image-20220718111957113](https://i0.hdslb.com/bfs/album/46a068736de2820fec19fbbbc2097daa854f885e.png)
+
+```
+height: 100vh;
+```
+
+## header 左侧的头像向左向下一点（居中）
+
+![image-20220718112202325](https://i0.hdslb.com/bfs/album/fd52bcd21c6c7745c05f34227ccd5714c893ef05.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 单词
 
 gutter： 边沟
+
+
+
+# 坑
+
+
 
 # bottom
 
