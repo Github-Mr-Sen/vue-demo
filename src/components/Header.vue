@@ -1,72 +1,57 @@
 <template>
-  <el-menu :default-openeds="opens" style="min-height: 100%; overflow-x: hidden"
-           background-color="rgb(48, 65, 86)"
-           text-color="#fff"
-           active-text-color="#ffd04b"
-           :collapse-transition="false"
-           :collapse="isCollapse"
-           router
-  >
-    <div style="height: 60px; line-height: 60px; text-align: center">
-      <img src="../assets/logo.png" alt="" style="width: 20px; position: relative; top: 5px;">
-      <b style="color: white; margin-left: 5px" v-show="logoTextShow">后台管理系统</b>
-    </div>
-    <div v-for="item in menus" :key="item.id">
-      <div v-if="item.path">
-        <el-menu-item :index="item.path">
-          <i :class="item.icon"></i>
-          <span slot="title">{{ item.name }}</span>
-        </el-menu-item>
-      </div>
-      <div v-else>
-        <el-submenu :index="item.id + ''">
-          <template slot="title">
-            <i :class="item.icon"></i>
-            <span slot="title">{{ item.name }}</span>
-          </template>
-          <div v-for="subItem in item.children" :key="subItem.id">
-            <el-menu-item :index="subItem.path">
-              <i :class="subItem.icon"></i>
-              <span slot="title">{{ subItem.name }}</span>
-            </el-menu-item>
-          </div>
-        </el-submenu>
-      </div>
-    </div>
-  </el-menu>
+  <div>
+    欢迎来到恋爱训练营
+    <el-dropdown class="avatar">
+      <span class="el-dropdown-link">
+          <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+        <i></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <router-link to="/index/userInfo">
+          <el-dropdown-item>个人中心</el-dropdown-item>
+        </router-link>
+        <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
+
+      </el-dropdown-menu>
+    </el-dropdown>
+
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Aside",
-  props: {
-    isCollapse: Boolean,
-    logoTextShow: Boolean
-  },
-  data() {
-    return {
-      menus: localStorage.getItem("menus") ? JSON.parse(localStorage.getItem("menus")) : [],
-      opens: localStorage.getItem("menus") ? JSON.parse(localStorage.getItem("menus")).map(v => v.id + '') : []
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "Header",
+
+  methods:{
+    logout(){
+      this.$message.info("退出成功")
     }
-  },
+  }
 }
 </script>
 
-<style>
-.el-menu-item.is-active {
-  background-color: rgb(38, 52, 69) !important;
+<style scoped>
+
+.el-dropdown-link {
+  cursor: pointer;
+  color: #f8f9fc;
 }
 
-.el-menu-item:hover {
-  background-color: rgb(38, 52, 69) !important;
+.el-icon-arrow-down {
+  font-size: 12px;
 }
 
-.el-submenu__title:hover {
-  background-color: rgb(38, 52, 69) !important;
+
+.avatar {
+  float: right;
+  padding-right: 30px;
+  padding-top: 10px;
+
 }
 
-/*解决收缩菜单文字不消失问题*/
-.el-menu--collapse span {
-  visibility: hidden;
+a {
+  text-decoration: none
 }
-</style>>
+
+</style>

@@ -18,6 +18,7 @@ service.interceptors.request.use(config => {
 
     // 添加Authorization请求头作为token
     config.headers['Authorization'] = localStorage.getItem('token')
+    return config
 })
 
 

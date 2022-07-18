@@ -285,6 +285,8 @@ require("./mock") //引入mock数据，关闭则注释该行
 
 
 
+
+
 # 框架分析
 
 ![image-20220718123534089](https://i0.hdslb.com/bfs/album/993b99c069242ec5a4b290e2ee69011b7f02518d.png)
@@ -325,6 +327,61 @@ height: 100vh;
 
 
 
+# 积累
+
+## 对axios的配置
+
+```js
+// 对axios的配置
+
+
+import axios from "axios";
+import router from "@/router";
+import {MessageBox, Message} from 'element-ui'
+import da from "element-ui/src/locale/lang/da";
+
+
+const service = axios.create({
+    baseURL: "http://localhost:9999",
+    timeout: 5 * 1000
+
+})
+
+// 请求拦截
+service.interceptors.request.use(config => {
+
+    // 添加Authorization请求头作为token
+    config.headers['Authorization'] = localStorage.getItem('token')
+})
+
+
+// 响应拦截
+service.interceptors.response.use(response => {
+
+        let data = response.data
+
+        if (data.code == 200) {
+            return data
+        } else {
+            Message.error(data.msg ? data.msg : '系统异常')
+
+            return Promise.reject(data.msg)
+
+        }
+    },
+    error => {
+        Message({
+            message: error.message,
+            type: 'error',
+            duration: 5 * 1000
+        })
+        return Promise.reject(error)
+
+    })
+```
+
+
+
 
 
 
@@ -343,7 +400,51 @@ gutter： 边沟
 
 # 坑
 
+## Vue 文件名报错
 
+ 在 vue-cli 创建的项目中，**创建文件并命名后**，会报 **“Component name "\**\**\*" should always be multi-word”** 报错；
+
+```shell
+Component name "******" should always be multi-word.eslintvue/multi-word-component-names
+```
+
+### **报错的原因：**
+
+ 在组件命名的时候未按照 ESLint 的官方代码规范进行命名，根据 ESLint 官方代码风格指南，除了根组件（App.vue）以外，其他自定义组件命名要**使用大驼峰命名方式或者用“-”连接单词**进行命名；
+
+
+
+### 解决方案
+- 配置 .eslintrc.js文件（亲测有效）
+
+### ***\*1、关闭命名规则\****
+
+找到 .eslintrc.js 文件在 rules 里面加上这么一句
+
+```bash
+// 关闭名称校验
+'vue/multi-word-component-names': "off" 
+```
+
+ 建议使用这种方法，更加正确合理；
+
+- 添加注释  `// eslint-disable-next-line vue/multi-word-component-names`
+
+```
+<template>
+  <div>
+home
+  </div>
+</template>
+
+<script>
+
+export default {
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "Home"
+}
+</script>
+```
 
 # bottom
 

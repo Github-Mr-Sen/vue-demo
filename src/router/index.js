@@ -8,30 +8,39 @@ import Index from "@/views/Index"
 Vue.use(VueRouter);
 //创建router实例对象，去管理一组一组的路由规则
 const router = new VueRouter({
-    routes:[
+    routes: [
         {
-            path:"/index",
+            path: "/",
             component: Index,
-            children:[
+            redirect:"/home",
+            children: [
                 {
-                    path:"home",
-                    component:()=>import("@/views/Home")
-                }
+                    path: "home",
+                    component: () => import("@/views/Home")
+                },
+                {
+                    path: "user",
+                    component: () => import("@/views/sys/User")
+                },
+                {
+                    path: "menu",
+                    component: () => import("@/views/sys/Menu")
+                },
+                {
+                    path: "roule",
+                    component: () => import("@/views/sys/Role")
+                },
+                {
+                    path: "userInfo",
+                    component: () => import("@/views/UserCenter")
+                },
 
 
-                ]
+            ]
         },
         {
-            path:"/index",
-            component: Index
-        },
-        {
-            path:"/index",
-            component: Index
-        },
-        {
-            path:"/index",
-            component: Index
+            path: "/login",
+            component: () => import("@/views/Login")
         }
     ]
 })
