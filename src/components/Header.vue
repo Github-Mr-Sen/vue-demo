@@ -1,13 +1,13 @@
 <template>
   <div>
-    欢迎来到恋爱训练营
+    欢迎来到 <span style="color:red;font-size: 20px">♥</span> 恋爱训练营
     <el-dropdown class="avatar">
       <span class="el-dropdown-link">
-          <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+          <el-avatar :src="require('@/assets/logo.png')"></el-avatar>
         <i></i>
       </span>
       <el-dropdown-menu slot="dropdown">
-        <router-link to="/index/userInfo">
+        <router-link to="/userInfo">
           <el-dropdown-item>个人中心</el-dropdown-item>
         </router-link>
         <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
@@ -50,7 +50,7 @@ export default {
 
 }
 
-a {
+.router-link {
   text-decoration: none
 }
 

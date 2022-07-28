@@ -8,6 +8,7 @@
         <Header></Header>
       </el-header>
       <el-main>
+        <Tabs class="kstab"></Tabs>
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -17,16 +18,12 @@
 <script>
 import SideMenu from "@/components/SideMenu";
 import Header from "@/components/Header";
+import Tabs from "@/components/Tabs";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Index",
-  components: {SideMenu, Header},
-  comments: {
-    SideMenu,
-    Header
-
-  },
+  components: {SideMenu, Header,Tabs},
   data() {
     return {}
   }
@@ -36,6 +33,8 @@ export default {
 
 <style scoped>
 .el-container {
+  padding: 0;
+  margin: 0;
   height: 100%;
   overflow: hidden;
 }
@@ -57,12 +56,17 @@ export default {
 .el-main {
   background-color: #E9EEF3;
   color: #333;
-  text-align: center;
-  line-height: 160px;
+  /*text-align: center;*/
+  padding: 0;
+  /*line-height: 160px;*/
 }
 
 .el-menu-vertical-demo {
   height: 100%;
+}
+
+.kstab {
+  height: 40px;
 }
 
 

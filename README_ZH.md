@@ -283,6 +283,71 @@ require("./mock") //引入mock数据，关闭则注释该行
 | :----- | :---------------- | :--- |
 | focus  | 使 input 获取焦点 | -    |
 
+## container 容器
+
+`<el-container>`：外层容器。当子元素中包含 `<el-header>` 或 `<el-footer>` 时，全部子元素会垂直上下排列，否则会水平左右排列。
+
+`<el-header>`：顶栏容器。
+
+`<el-aside>`：侧边栏容器。
+
+`<el-main>`：主要区域容器。
+
+`<el-footer>`：底栏容器。
+
+以上组件采用了 flex 布局
+
+```vue
+//因为是flex布局，所以可以用container灵活组合
+<el-container>
+  <el-header>Header</el-header>
+  <el-container>
+    <el-aside width="200px">Aside</el-aside>
+    <el-container>
+      <el-main>Main</el-main>
+      <el-footer>Footer</el-footer>
+    </el-container>
+  </el-container>
+</el-container>
+
+<el-container>
+  <el-aside width="200px">Aside</el-aside>
+  <el-container>
+    <el-header>Header</el-header>
+    <el-main>Main</el-main>
+  </el-container>
+</el-container>
+```
+
+可以有不同的排列方式
+
+![image-20220718204332269](https://i0.hdslb.com/bfs/album/e45fdff6809aacc62daed95d8834281a16b19bcf.png)
+
+
+
+![image-20220718204117400](https://i0.hdslb.com/bfs/album/eb10594e01eb84e0196f3d6b5d4b7070e3d6cebf.png)
+
+## Tabs 标签页
+说明：**分隔内容上有关联但属于不同类别的数据集合。**
+`<el-tabs>`包裹几个不同类别的数据集合`<el-tab-pane>`
+
+- <el-tabs>
+  - @tab-click 处理点击事件，同时会有vc 和event两个参数
+
+  - :value 和v-model 可以指定默认选项，默认值为《el-tab-pane>的name属性值
+
+- <el-tab-pane>
+  - label属性为标签名称
+  - name属性为切换页签使用
+
+
+
+## button
+
+![image-20220718233240467](https://i0.hdslb.com/bfs/album/17201031f8ccffbd7e95b5dd170f37cd2a363dab.png)
+
+
+
 
 
 
@@ -305,6 +370,8 @@ require("./mock") //引入mock数据，关闭则注释该行
 
 
 
+
+
 # 思考
 
 ## 左侧导航栏铺满整个左侧
@@ -315,7 +382,7 @@ require("./mock") //引入mock数据，关闭则注释该行
 height: 100vh;
 ```
 
-## header 左侧的头像向左向下一点（居中）
+## header 右侧的头像向左向下一点（居中）
 
 ![image-20220718112202325](https://i0.hdslb.com/bfs/album/fd52bcd21c6c7745c05f34227ccd5714c893ef05.png)
 
@@ -333,8 +400,6 @@ height: 100vh;
 
 ```js
 // 对axios的配置
-
-
 import axios from "axios";
 import router from "@/router";
 import {MessageBox, Message} from 'element-ui'
@@ -382,19 +447,45 @@ service.interceptors.response.use(response => {
 
 
 
+## 图片适应布局正好全部显示，不显示滚动条
+
+![image-20220719164717051](https://i0.hdslb.com/bfs/album/5af4af9dcfd7e62e3762fc5d767dec2efdca0272.png)
 
 
 
+```vue
+<template>
+  <div style="height:100%; overflow: hidden">
+    <el-image
+        style="height: 100%;"
+        :src="require('@/assets/yy_home.webp')"
+        :fit="cover"
+        ></el-image>
+  </div>
+</template>
+```
 
+- 让图片的高度跟父容器一样  height：100%
 
+- 父容器隐藏滚动条   overflow：hidden
 
+## 删除数组中的某个元素
 
+```js
+
+// 首先找到删除元素的索引
+let index = state.tabList.findIndex((element) => element.name == tabName);
+// 其次从索引处删除1个元素
+state.tabList.splice(index, 1);
+```
 
 
 
 # 单词
 
 gutter： 边沟
+
+container:容器
 
 
 
@@ -415,9 +506,7 @@ Component name "******" should always be multi-word.eslintvue/multi-word-compone
 
 
 ### 解决方案
-- 配置 .eslintrc.js文件（亲测有效）
-
-### ***\*1、关闭命名规则\****
+- 配置 .eslintrc.js文件
 
 找到 .eslintrc.js 文件在 rules 里面加上这么一句
 
@@ -446,5 +535,18 @@ export default {
 </script>
 ```
 
+## 全面屏蔽该文件的eslint检查
+
+/* eslint-disable */
+
+## vue2  和vuex4 集成的大坑
+
+> vuex4  不在全局注册 $store 了，一直undefined 弄了2小时
+
+![image-20220721144550706](https://i0.hdslb.com/bfs/album/95cccd807f3c5d3d85b6acf9f8b911e0ba66842d.png)
+
 # bottom
 
+![image-20220721180453991](https://i0.hdslb.com/bfs/album/c142aeeaf6ae588246b5ceadccfc57dd237b8292.png)
+
+![image-20220721180514047](https://i0.hdslb.com/bfs/album/beea8b0e401cf7de828fb064304b8b45e80b0acb.png)

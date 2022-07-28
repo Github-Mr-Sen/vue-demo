@@ -1,9 +1,8 @@
 <template>
-  <div style="overflow: hidden">
+  <div class="imgs">
     <el-image
-        style="width: 35%;"
+        style="height: 100%;"
         :src="require('@/assets/yy_home.webp')"
-        :fit="cover"
         ></el-image>
   </div>
 </template>
@@ -19,3 +18,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+.imgs{
+  height:100%;
+  display: block;
+
+}
+
+</style>
